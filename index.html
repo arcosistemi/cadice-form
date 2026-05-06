@@ -1241,7 +1241,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var r,n,i,a,
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.3
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.4
 </footer>
 
 <script>
@@ -1496,6 +1496,10 @@ function resetForm() {
   document.querySelectorAll('.radio-item, .section-main').forEach(el => el.classList.remove('selected'));
   document.querySelectorAll('.sub-field').forEach(el => el.classList.remove('visible'));
   document.getElementById('f-notifiche').style.display = 'none';
+  // Ripristina pulsante invio
+  document.getElementById('btn-invia').disabled = false;
+  document.getElementById('btn-label').textContent = 'Invia scheda';
+  document.getElementById('spinner').style.display = 'none';
   document.getElementById('step-success').classList.remove('active');
   currentStep = 1;
   document.getElementById('step-1').classList.add('active');
