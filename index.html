@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="it"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<html lang="it">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scheda Appuntamento CADICE — AUA Soluzioni</title>
-<link href="index_files/css2.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -807,7 +808,7 @@
       <div id="riepilogo-content"></div>
     </div>
     <input type="hidden" id="luogo" value="">
-    <input type="hidden" id="data-firma" value="06/05/2026">
+    <input type="hidden" id="data-firma" value="">
     <div class="nav">
       <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
@@ -842,7 +843,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.1
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.2
 </footer>
 
 <script>
@@ -1134,6 +1135,41 @@ function collectData() {
 
 function downloadPDF() {
   const d = collectData();
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+
+  const pageW = 210;
+  const margin = 18;
+  const contentW = pageW - margin * 2;
+  let y = 0;
+
+  // ── Header block (navy) ──────────────────────────────────
+  doc.setFillColor(11, 31, 74);
+  doc.rect(0, 0, pageW, 36, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(255, 255, 255);
+  doc.text('Scheda Appuntamento Assistenza CADICE', margin, 14);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(232, 201, 122);
+  doc.text('AUA — Agenti UnipolSai Associati  ·  Sistema AUA', margin, 22);
+  doc.setTextColor(180, 180, 180);
+  doc.text('Data di compilazione: ' + d.data, margin, 29);
+
+  // ── Gold bar ─────────────────────────────────────────────
+  doc.setFillColor(201, 168, 76);
+  doc.rect(0, 36, pageW, 2.5, 'F');
+  y = 50;
+
+  // ── Section title ─────────────────────────────────────────
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(201, 168, 76);
+  doc.text('RIEPILOGO DATI COMPILATI', margin, y);
+  y += 7;
+
+  // ── Table rows ────────────────────────────────────────────
   const rows = [
     ['Codice Agenzia', d.codice],
     ['Ragione Sociale', d.ragione],
@@ -1148,48 +1184,52 @@ function downloadPDF() {
     ['Data di compilazione', d.data],
   ];
 
-  const rowsHTML = rows.map(([k, v]) =>
-    '<tr>' +
-    '<td style="padding:9px 14px;font-size:12px;color:#5A6280;font-weight:500;border-bottom:1px solid #EEF0F5;width:45%;">' + k + '</td>' +
-    '<td style="padding:9px 14px;font-size:12px;color:#0B1F4A;font-weight:600;border-bottom:1px solid #EEF0F5;">' + v + '</td>' +
-    '</tr>'
-  ).join('');
+  const colKey = 65;
+  const colVal = contentW - colKey;
+  const rowH = 10;
 
-  const printContent = '<!DOCTYPE html>' +
-    '<html lang="it"><head><meta charset="UTF-8">' +
-    '<title>Riepilogo CADICE</title>' +
-    '<style>' +
-    '* { box-sizing:border-box; margin:0; padding:0; }' +
-    'body { font-family: Arial, sans-serif; background:#fff; color:#0B1F4A; }' +
-    '.page { max-width:680px; margin:0 auto; padding:40px 40px 60px; }' +
-    '.header { background:#0B1F4A; padding:24px 28px; margin-bottom:32px; }' +
-    '.header h1 { font-size:17px; font-weight:700; color:white; line-height:1.3; }' +
-    '.header p { font-size:12px; color:#E8C97A; margin-top:4px; }' +
-    '.gold-bar { height:3px; background:#C9A84C; margin-bottom:28px; }' +
-    'h2 { font-size:13px; font-weight:700; color:#C9A84C; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; }' +
-    'table { width:100%; border-collapse:collapse; border:1px solid #EEF0F5; }' +
-    'tr:nth-child(even) { background:#F8F9FB; }' +
-    '.footer { margin-top:40px; text-align:center; font-size:11px; color:#8A91A8; border-top:1px solid #EEF0F5; padding-top:16px; }' +
-    '</style></head><body>' +
-    '<div class="page">' +
-    '<div class="header"><h1>Scheda Appuntamento Assistenza CADICE</h1>' +
-    '<p>AUA — Agenti UnipolSai Associati · Sistema AUA</p></div>' +
-    '<div class="gold-bar"></div>' +
-    '<h2>Riepilogo dati compilati</h2>' +
-    '<table>' + rowsHTML + '</table>' +
-    '<div class="footer">AUA — Agenti UnipolSai Associati · Via Stalingrado 57, 40128 Bologna · info@auaonline.it</div>' +
-    '</div></body></html>';
+  rows.forEach(([k, v], i) => {
+    // Alternating row background
+    if (i % 2 === 0) {
+      doc.setFillColor(248, 249, 251);
+    } else {
+      doc.setFillColor(255, 255, 255);
+    }
+    doc.rect(margin, y - 5.5, contentW, rowH, 'F');
 
-  // Create blob and download as HTML (printable)
-  const blob = new Blob([printContent], { type: 'text/html;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'Riepilogo_CADICE_' + d.agente.replace(/\s+/g, '_') + '.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+    // Key
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(90, 98, 128);
+    doc.text(k, margin + 3, y);
+
+    // Value — wrap long text
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(11, 31, 74);
+    const valLines = doc.splitTextToSize(v, colVal - 4);
+    doc.text(valLines, margin + colKey, y);
+
+    // Row separator
+    doc.setDrawColor(238, 240, 245);
+    doc.setLineWidth(0.3);
+    doc.line(margin, y + 4.5, margin + contentW, y + 4.5);
+
+    y += valLines.length > 1 ? rowH + (valLines.length - 1) * 5 : rowH;
+  });
+
+  // ── Footer ────────────────────────────────────────────────
+  y += 10;
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(138, 145, 168);
+  doc.text('AUA — Agenti UnipolSai Associati  ·  Via Stalingrado 57, 40128 Bologna  ·  info@auaonline.it', pageW / 2, y, { align: 'center' });
+
+  // ── Border line above footer ──────────────────────────────
+  doc.setDrawColor(214, 218, 232);
+  doc.setLineWidth(0.4);
+  doc.line(margin, y - 5, margin + contentW, y - 5);
+
+  doc.save('Riepilogo_CADICE_' + d.agente.replace(/\s+/g, '_') + '.pdf');
 }
 
 // Set today's date as default value (editable)
@@ -1199,6 +1239,5 @@ function todayIT() {
 document.getElementById('data-firma').value = todayIT();
 updateProgress();
 </script>
-
-
-</body></html>
+</body>
+</html>
