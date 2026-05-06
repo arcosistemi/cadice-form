@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheda Appuntamento CADICE — AUA Soluzioni</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="assets/logo-aua.png" alt="Sistema AUA" style="height:56px; width:auto;">
+
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-title">
+      <h1>Scheda Appuntamento<br>Assistenza <em>CADICE</em></h1>
+      <p>Da compilare a cura dell'Agente</p>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-label">
+        <span id="progress-text">Sezione 1 di 4</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- STEP 1: Anagrafica -->
+  <div class="step active" id="step-1">
+    <div class="vademecum-banner">
+      <span class="vademecum-text">📄 Prima di iniziare clicca qui e scarica il vademecum</span>
+      <a class="btn-vademecum" href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf">
+        ⬇ Vademecum
+      </a>
+    </div>
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Dati Identificativi</div>
+      <h2>Informazioni sull'Agenzia</h2>
+      <p>Inserisci i tuoi dati per identificare l'agenzia e l'agente che partecipa all'appuntamento.</p>
+    </div>
+    <div class="card">
+      <div class="fields-row">
+        <div class="field" id="f-codice">
+          <label>Codice Agenzia <span class="req">*</span></label>
+          <input type="text" id="codice" placeholder="Es. 12345" maxlength="10">
+          <span class="error-msg">Campo obbligatorio</span>
+        </div>
+        <div class="field">
+          <label>Ragione Sociale Agenzia <span class="req">*</span></label>
+          <input type="text" id="ragione" placeholder="Denominazione agenzia">
+        </div>
+      </div>
+      <div class="field" id="f-nome">
+        <label>Cognome e Nome dell'Agente <span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Es. Rossi Mario">
+        <span class="error-msg">Campo obbligatorio</span>
+      </div>
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="btn btn-primary" onclick="goTo(2)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Accesso Cadice + Sezioni -->
+  <div class="step" id="step-2">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Accesso &amp; Sezioni</div>
+      <h2>Utilizzo di CADICE</h2>
+      <p>Indica se hai già effettuato l'accesso a CADICE e le sezioni di tuo interesse.</p>
+    </div>
+    <div class="card">
+      <div class="field">
+        <label>Hai già utilizzato CADICE? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item" onclick="selectRadio('cadice-si', this); document.getElementById('f-notifiche').style.display='none';">
+            <input type="radio" name="cadice" id="cadice-si" value="Sì">
+            <span>Sì</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('cadice-no', this); document.getElementById('f-notifiche').style.display='block';">
+            <input type="radio" name="cadice" id="cadice-no" value="No">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+      <div class="field" id="f-notifiche" style="display:none;">
+        <div class="info-box">
+          <strong>Accedi a CADICE</strong> prima di procedere, seguendo le indicazioni riportate nel <a href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf" style="color:var(--navy-light);font-weight:600;text-decoration:underline;">Vademecum</a>. Una volta effettuato l'accesso, verifica le notifiche (campanella in alto a destra).
+        </div>
+        <label>Numero di notifiche rilevate <span class="req">*</span></label>
+        <input type="number" id="notifiche" placeholder="0" min="0" style="max-width:140px;">
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-label">Sezioni di interesse</div>
+      <div class="field">
+        <label>A quali sezioni di CADICE sei interessato? <span class="opt">(seleziona tutte quelle di interesse)</span></label>
+        <div class="section-grid">
+
+          <div class="section-main" id="sm-prodotti">
+            <label class="section-main-label" onclick="toggleSection('sm-prodotti', 's-prodotti')">
+              <input type="checkbox" id="s-prodotti" value="Prodotti Assicurativi">
+              <span>Prodotti Assicurativi</span>
+            </label>
+          </div>
+
+          <div class="section-main has-subs" id="sm-documenti">
+            <label class="section-main-label" onclick="toggleSection('sm-documenti', 's-documenti')">
+              <input type="checkbox" id="s-documenti" value="Documenti">
+              <span>Documenti</span>
+            </label>
+            <div class="section-subs">
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Documenti IDD"> <span>Documenti IDD</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Antiriciclaggio"> <span>Antiriciclaggio</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Onorabilità"> <span>Onorabilità</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="MOG"> <span>MOG</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="section-main" id="sm-registro">
+            <label class="section-main-label" onclick="toggleSection('sm-registro', 's-registro')">
+              <input type="checkbox" id="s-registro" value="Registro Incentivi">
+              <span>Registro Incentivi</span>
+            </label>
+          </div>
+
+          <div class="section-main" id="sm-rete">
+            <label class="section-main-label" onclick="toggleSection('sm-rete', 's-rete')">
+              <input type="checkbox" id="s-rete" value="Rete Distributiva">
+              <span>Rete Distributiva</span>
+            </label>
+          </div>
+
+          <div class="section-main has-subs" id="sm-privacy">
+            <label class="section-main-label" onclick="toggleSection('sm-privacy', 's-privacy')">
+              <input type="checkbox" id="s-privacy" value="Privacy">
+              <span>Privacy</span>
+            </label>
+            <div class="section-subs">
+              <label class="sub-item">
+                <input type="checkbox" name="priv-sub" value="Modulistica Privacy"> <span>Modulistica</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="priv-sub" value="Monitoraggio Privacy"> <span>Monitoraggio</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(1)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(3)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Mandato + Partecipazione -->
+  <div class="step" id="step-3">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Agenzia &amp; Partecipazione</div>
+      <h2>Tipologia di mandato e partecipazione</h2>
+      <p>Indica il tipo di mandato della tua agenzia e chi parteciperà all'appuntamento CADICE.</p>
+    </div>
+    <div class="card">
+      <div class="field">
+        <label>L'Agenzia è: <span class="req">*</span></label>
+        <div class="info-box" style="margin-bottom:14px; font-size:12px;">
+          Si intende <strong>Plurimandataria</strong> l'agenzia con mandati ulteriori rispetto a Unipol e UniSalute.
+        </div>
+        <div class="radio-group inline">
+          <label class="radio-item" onclick="selectRadio('m-mono', this); hideMandatoVita()">
+            <input type="radio" name="mandato" id="m-mono" value="Monomandataria">
+            <span>Monomandataria</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('m-pluri', this); showMandatoVita()">
+            <input type="radio" name="mandato" id="m-pluri" value="Plurimandataria">
+            <span>Plurimandataria</span>
+          </label>
+        </div>
+      </div>
+      <div class="field sub-field" id="f-vita">
+        <label>Ha un mandato VITA con una Compagnia esterna al Gruppo Unipol? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item" onclick="selectRadio('vita-si', this)">
+            <input type="radio" name="vita" id="vita-si" value="Sì">
+            <span>Sì</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('vita-no', this)">
+            <input type="radio" name="vita" id="vita-no" value="No">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label>All'appuntamento CADICE parteciperà: <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selectRadio('p-personale', this); hideCollaboratore()">
+            <input type="radio" name="partecipa" id="p-personale" value="Personalmente">
+            <span>L'Agente personalmente</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('p-delega', this); showCollaboratore()">
+            <input type="radio" name="partecipa" id="p-delega" value="Collaboratore delegato">
+            <span>Un Collaboratore delegato</span>
+          </label>
+        </div>
+        <div class="sub-field" id="f-collab">
+          <div class="info-box" style="font-size:12px; margin-bottom:12px;">
+            <strong>Nota bene:</strong> se parteciperà il Collaboratore, è necessario procedere alla "delega" come indicato nel Vademecum (<a href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf" style="color:var(--navy-light);font-weight:600;text-decoration:underline;">clicca per scaricare</a>).
+          </div>
+          <label>Cognome e Nome del Collaboratore <span class="req">*</span></label>
+          <input type="text" id="collaboratore" placeholder="Es. Bianchi Anna">
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(2)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Riepilogo + Invio -->
+  <div class="step" id="step-4">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Conferma</div>
+      <h2>Verifica e invia</h2>
+      <p>Controlla i dati prima di inviare la scheda. Potrai tornare indietro per correggere.</p>
+    </div>
+    <div class="card">
+      <div class="section-label">Riepilogo</div>
+      <div id="riepilogo-content"></div>
+    </div>
+    <input type="hidden" id="luogo" value="">
+    <input type="hidden" id="data-firma" value="">
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+        <button class="btn btn-secondary" onclick="downloadPDF()" style="border-color:var(--navy);color:var(--navy);">
+          ⬇ Scarica riepilogo PDF
+        </button>
+        <button class="btn btn-gold" id="btn-invia" onclick="submitForm()">
+          <span id="btn-label">Invia scheda</span>
+          <div class="spinner gold" id="spinner"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step" id="step-success">
+    <div class="card">
+      <div class="success-wrap">
+        <div class="success-icon">✓</div>
+        <h2>Scheda inviata</h2>
+        <p>I dati sono stati registrati correttamente. Lo staff AUA ti contatterà per confermare l'appuntamento CADICE.</p>
+        <div class="summary-box" id="success-summary"></div>
+        <br>
+        <button class="btn btn-secondary" onclick="resetForm()">Compila una nuova scheda</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
+  Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
+  Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.1
+</footer>
+
+<script>
+// ── CONFIG ────────────────────────────────────────────────
+// Sostituisci con l'URL del tuo Google Apps Script (vedi guida)
+const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+// ── STATE ─────────────────────────────────────────────────
+let currentStep = 1;
+const totalSteps = 4;
+
+// ── NAVIGATION ────────────────────────────────────────────
+function goTo(n) {
+  if (n > currentStep && !validate(currentStep)) return;
+  if (n === totalSteps) buildRiepilogo();
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep = n;
+  const target = document.getElementById('step-' + currentStep) || document.getElementById('step-success');
+  target.classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const pct = Math.round(((currentStep - 1) / totalSteps) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-text').textContent =
+    currentStep <= totalSteps ? 'Sezione ' + currentStep + ' di ' + totalSteps : 'Completato';
+}
+
+// ── VALIDATION ────────────────────────────────────────────
+function validate(step) {
+  let ok = true;
+  if (step === 1) {
+    ok = requireField('codice', 'f-codice') & requireField('nome', 'f-nome');
+    if (!document.getElementById('ragione').value.trim()) {
+      // Ragione sociale not required strictly, just nudge
+    }
+  }
+  if (step === 2) {
+    const r = document.querySelector('input[name="cadice"]:checked');
+    if (!r) { alert('Indica se hai già utilizzato CADICE.'); ok = false; }
+  }
+  if (step === 3) {
+    const m = document.querySelector('input[name="mandato"]:checked');
+    if (!m) { alert('Seleziona il tipo di mandato dell\'agenzia.'); ok = false; }
+    const p = document.querySelector('input[name="partecipa"]:checked');
+    if (!p) { alert('Indica chi parteciperà all\'appuntamento.'); ok = false; }
+    if (p && p.value === 'Collaboratore delegato') {
+      if (!document.getElementById('collaboratore').value.trim()) {
+        alert('Inserisci il nome del collaboratore delegato.'); ok = false;
+      }
+    }
+  }
+  return !!ok;
+}
+
+function requireField(inputId, fieldId) {
+  const inp = document.getElementById(inputId);
+  const field = document.getElementById(fieldId);
+  if (!inp.value.trim()) {
+    field.classList.add('has-error');
+    inp.addEventListener('input', () => field.classList.remove('has-error'), { once: true });
+    return false;
+  }
+  return true;
+}
+
+// ── UI HELPERS ────────────────────────────────────────────
+function selectRadio(id, labelEl) {
+  const name = document.getElementById(id).name;
+  document.querySelectorAll('input[name="' + name + '"]').forEach(r => {
+    r.closest('.radio-item').classList.remove('selected');
+  });
+  document.getElementById(id).checked = true;
+  labelEl.classList.add('selected');
+}
+
+function toggleSection(sectionId, cbId) {
+  const section = document.getElementById(sectionId);
+  const cb = document.getElementById(cbId);
+  setTimeout(() => {
+    if (cb.checked) {
+      section.classList.add('selected');
+      // Auto-check all sub-items when parent is checked
+      section.querySelectorAll('.section-subs input[type=checkbox]').forEach(c => {
+        c.checked = true;
+      });
+    } else {
+      section.classList.remove('selected');
+      // Uncheck all sub-items when parent is unchecked
+      section.querySelectorAll('input[type=checkbox]').forEach(c => {
+        if (c !== cb) c.checked = false;
+      });
+    }
+  }, 0);
+}
+
+// When a sub-item is manually unchecked, if ALL subs are unchecked, uncheck parent too
+document.addEventListener('change', function(e) {
+  if (e.target.closest('.section-subs')) {
+    const section = e.target.closest('.section-main');
+    if (!section) return;
+    const parentCb = section.querySelector('.section-main-label input[type=checkbox]');
+    const subs = section.querySelectorAll('.section-subs input[type=checkbox]');
+    const anyChecked = Array.from(subs).some(s => s.checked);
+    if (!anyChecked && parentCb) {
+      parentCb.checked = false;
+      section.classList.remove('selected');
+    }
+  }
+});
+
+function showMandatoVita() { document.getElementById('f-vita').classList.add('visible'); }
+function hideMandatoVita() {
+  document.getElementById('f-vita').classList.remove('visible');
+  document.querySelectorAll('input[name="vita"]').forEach(r => r.checked = false);
+  document.querySelectorAll('input[name="vita"]').forEach(r => r.closest('.radio-item').classList.remove('selected'));
+}
+function showCollaboratore() { document.getElementById('f-collab').classList.add('visible'); }
+function hideCollaboratore() {
+  document.getElementById('f-collab').classList.remove('visible');
+  document.getElementById('collaboratore').value = '';
+}
+
+// cadice sì/no → show notifiche field
+document.addEventListener('change', function(e) {
+  if (e.target.name === 'cadice') {
+    document.getElementById('f-notifiche').style.display = (e.target.value === 'No') ? 'block' : 'none';
+  }
+});
+
+// ── RIEPILOGO ─────────────────────────────────────────────
+function buildRiepilogo() {
+  const sezioni = [];
+  document.querySelectorAll('.section-main.selected > .section-main-label input[type=checkbox]').forEach(cb => {
+    const subs = [];
+    const sm = cb.closest('.section-main');
+    sm.querySelectorAll('.section-subs input:checked').forEach(s => subs.push(s.value));
+    sezioni.push(cb.value + (subs.length ? ' (' + subs.join(', ') + ')' : ''));
+  });
+
+  const mandato = document.querySelector('input[name="mandato"]:checked');
+  const vita = document.querySelector('input[name="vita"]:checked');
+  const cadice = document.querySelector('input[name="cadice"]:checked');
+  const partecipa = document.querySelector('input[name="partecipa"]:checked');
+
+  const rows = [
+    ['Codice Agenzia', document.getElementById('codice').value],
+    ['Ragione Sociale', document.getElementById('ragione').value || '—'],
+    ['Agente', document.getElementById('nome').value],
+    ['CADICE già usato', cadice ? cadice.value : '—'],
+    cadice && cadice.value === 'Sì' ? ['Notifiche', document.getElementById('notifiche').value || '0'] : null,
+    ['Sezioni interesse', sezioni.length ? sezioni.join(' · ') : 'Nessuna selezionata'],
+    ['Tipo mandato', mandato ? mandato.value : '—'],
+    mandato && mandato.value === 'Plurimandataria' ? ['Mandato VITA esterno', vita ? vita.value : '—'] : null,
+    ['Partecipante', partecipa ? partecipa.value : '—'],
+    partecipa && partecipa.value === 'Collaboratore delegato' ? ['Collaboratore', document.getElementById('collaboratore').value] : null,
+  ].filter(Boolean);
+
+  const html = rows.map(([k, v]) =>
+    `<div class="summary-row"><span class="k">${k}</span><span class="v">${v}</span></div>`
+  ).join('');
+  document.getElementById('riepilogo-content').innerHTML = html;
+}
+
+// ── SUBMIT ────────────────────────────────────────────────
+async function submitForm() {
+  const luogo = '';
+  const data = document.getElementById('data-firma').value.trim();
+
+  const sezioni = [];
+  document.querySelectorAll('.section-main.selected > .section-main-label input[type=checkbox]').forEach(cb => {
+    const subs = [];
+    cb.closest('.section-main').querySelectorAll('.section-subs input:checked').forEach(s => subs.push(s.value));
+    sezioni.push(cb.value + (subs.length ? ' (' + subs.join(', ') + ')' : ''));
+  });
+
+  const mandato = document.querySelector('input[name="mandato"]:checked');
+  const vita = document.querySelector('input[name="vita"]:checked');
+  const cadice = document.querySelector('input[name="cadice"]:checked');
+  const partecipa = document.querySelector('input[name="partecipa"]:checked');
+
+  const payload = {
+    timestamp: new Date().toLocaleString('it-IT'),
+    codice: document.getElementById('codice').value,
+    ragione: document.getElementById('ragione').value,
+    agente: document.getElementById('nome').value,
+    cadice_usato: cadice ? cadice.value : '',
+    notifiche: document.getElementById('notifiche').value || '',
+    sezioni: sezioni.join(' | '),
+    mandato: mandato ? mandato.value : '',
+    mandato_vita: vita ? vita.value : '',
+    partecipante: partecipa ? partecipa.value : '',
+    collaboratore: document.getElementById('collaboratore').value,
+    luogo: luogo,
+    data: data,
+  };
+
+  // Loading state
+  document.getElementById('btn-label').textContent = 'Invio in corso…';
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('btn-invia').disabled = true;
+
+  try {
+    if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+      // DEMO MODE: simula invio
+      await new Promise(r => setTimeout(r, 1200));
+      showSuccess(payload);
+      return;
+    }
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    showSuccess(payload);
+  } catch (err) {
+    alert('Errore durante l\'invio. Riprova o contatta info@auaonline.it');
+    document.getElementById('btn-label').textContent = 'Invia scheda';
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('btn-invia').disabled = false;
+  }
+}
+
+function showSuccess(payload) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-success').classList.add('active');
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-pct').textContent = '100%';
+  document.getElementById('progress-text').textContent = 'Completato';
+
+  const rows = [
+    ['Agente', payload.agente],
+    ['Agenzia', payload.ragione || payload.codice],
+    ['Tipo mandato', payload.mandato],
+    ['Partecipante', payload.partecipante],
+    ['Data di compilazione', payload.data],
+  ];
+  document.getElementById('success-summary').innerHTML = rows.map(([k, v]) =>
+    `<div class="summary-row"><span class="k">${k}</span><span class="v">${v || '—'}</span></div>`
+  ).join('');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  document.querySelectorAll('input[type=text], input[type=number], input[type=email]').forEach(i => i.value = '');
+  document.getElementById('data-firma').value = todayIT();
+  document.querySelectorAll('input[type=radio], input[type=checkbox]').forEach(i => i.checked = false);
+  document.querySelectorAll('.radio-item, .section-main').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.sub-field').forEach(el => el.classList.remove('visible'));
+  document.getElementById('f-notifiche').style.display = 'none';
+  document.getElementById('step-success').classList.remove('active');
+  currentStep = 1;
+  document.getElementById('step-1').classList.add('active');
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+// ── PDF DOWNLOAD ──────────────────────────────────────────
+function collectData() {
+  const sezioni = [];
+  document.querySelectorAll('.section-main.selected > .section-main-label input[type=checkbox]').forEach(cb => {
+    const subs = [];
+    cb.closest('.section-main').querySelectorAll('.section-subs input:checked').forEach(s => subs.push(s.value));
+    sezioni.push(cb.value + (subs.length ? ' (' + subs.join(', ') + ')' : ''));
+  });
+  const mandato = document.querySelector('input[name="mandato"]:checked');
+  const vita = document.querySelector('input[name="vita"]:checked');
+  const cadice = document.querySelector('input[name="cadice"]:checked');
+  const partecipa = document.querySelector('input[name="partecipa"]:checked');
+  return {
+    codice: document.getElementById('codice').value || '—',
+    ragione: document.getElementById('ragione').value || '—',
+    agente: document.getElementById('nome').value || '—',
+    cadice_usato: cadice ? cadice.value : '—',
+    notifiche: document.getElementById('notifiche').value || '—',
+    sezioni: sezioni.length ? sezioni.join(', ') : 'Nessuna selezionata',
+    mandato: mandato ? mandato.value : '—',
+    mandato_vita: vita ? vita.value : '—',
+    partecipante: partecipa ? partecipa.value : '—',
+    collaboratore: document.getElementById('collaboratore').value || '—',
+    data: document.getElementById('data-firma').value || todayIT(),
+  };
+}
+
+function downloadPDF() {
+  const d = collectData();
+  const rows = [
+    ['Codice Agenzia', d.codice],
+    ['Ragione Sociale', d.ragione],
+    ['Agente', d.agente],
+    ['CADICE già utilizzato', d.cadice_usato],
+    ...(d.cadice_usato === 'No' ? [['Notifiche rilevate', d.notifiche]] : []),
+    ['Sezioni di interesse', d.sezioni],
+    ['Tipo mandato', d.mandato],
+    ...(d.mandato === 'Plurimandataria' ? [['Mandato VITA esterno', d.mandato_vita]] : []),
+    ['Partecipante', d.partecipante],
+    ...(d.partecipante === 'Collaboratore delegato' ? [['Collaboratore', d.collaboratore]] : []),
+    ['Data di compilazione', d.data],
+  ];
+
+  const rowsHTML = rows.map(([k, v]) =>
+    '<tr>' +
+    '<td style="padding:9px 14px;font-size:12px;color:#5A6280;font-weight:500;border-bottom:1px solid #EEF0F5;width:45%;">' + k + '</td>' +
+    '<td style="padding:9px 14px;font-size:12px;color:#0B1F4A;font-weight:600;border-bottom:1px solid #EEF0F5;">' + v + '</td>' +
+    '</tr>'
+  ).join('');
+
+  const printContent = '<!DOCTYPE html>' +
+    '<html lang="it"><head><meta charset="UTF-8">' +
+    '<title>Riepilogo CADICE</title>' +
+    '<style>' +
+    '* { box-sizing:border-box; margin:0; padding:0; }' +
+    'body { font-family: Arial, sans-serif; background:#fff; color:#0B1F4A; }' +
+    '.page { max-width:680px; margin:0 auto; padding:40px 40px 60px; }' +
+    '.header { background:#0B1F4A; padding:24px 28px; margin-bottom:32px; }' +
+    '.header h1 { font-size:17px; font-weight:700; color:white; line-height:1.3; }' +
+    '.header p { font-size:12px; color:#E8C97A; margin-top:4px; }' +
+    '.gold-bar { height:3px; background:#C9A84C; margin-bottom:28px; }' +
+    'h2 { font-size:13px; font-weight:700; color:#C9A84C; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; }' +
+    'table { width:100%; border-collapse:collapse; border:1px solid #EEF0F5; }' +
+    'tr:nth-child(even) { background:#F8F9FB; }' +
+    '.footer { margin-top:40px; text-align:center; font-size:11px; color:#8A91A8; border-top:1px solid #EEF0F5; padding-top:16px; }' +
+    '</style></head><body>' +
+    '<div class="page">' +
+    '<div class="header"><h1>Scheda Appuntamento Assistenza CADICE</h1>' +
+    '<p>AUA — Agenti UnipolSai Associati · Sistema AUA</p></div>' +
+    '<div class="gold-bar"></div>' +
+    '<h2>Riepilogo dati compilati</h2>' +
+    '<table>' + rowsHTML + '</table>' +
+    '<div class="footer">AUA — Agenti UnipolSai Associati · Via Stalingrado 57, 40128 Bologna · info@auaonline.it</div>' +
+    '</div>
+<script src="app.js"></script>
+</body>
+</html>
