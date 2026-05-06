@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheda Appuntamento CADICE — AUA Soluzioni</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <img src="assets/logo-aua.png" alt="Sistema AUA" style="height:56px; width:auto;">
+
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-title">
+      <h1>Scheda Appuntamento<br>Assistenza <em>CADICE</em></h1>
+      <p>Da compilare a cura dell'Agente</p>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-label">
+        <span id="progress-text">Sezione 1 di 4</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- STEP 1: Anagrafica -->
+  <div class="step active" id="step-1">
+    <div class="vademecum-banner">
+      <span class="vademecum-text">📄 Prima di iniziare clicca qui e scarica il vademecum</span>
+      <a class="btn-vademecum" href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf">
+        ⬇ Vademecum
+      </a>
+    </div>
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Dati Identificativi</div>
+      <h2>Informazioni sull'Agenzia</h2>
+      <p>Inserisci i tuoi dati per identificare l'agenzia e l'agente che partecipa all'appuntamento.</p>
+    </div>
+    <div class="card">
+      <div class="fields-row">
+        <div class="field" id="f-codice">
+          <label>Codice Agenzia <span class="req">*</span></label>
+          <input type="text" id="codice" placeholder="Es. 12345" maxlength="10">
+          <span class="error-msg">Campo obbligatorio</span>
+        </div>
+        <div class="field">
+          <label>Ragione Sociale Agenzia <span class="req">*</span></label>
+          <input type="text" id="ragione" placeholder="Denominazione agenzia">
+        </div>
+      </div>
+      <div class="field" id="f-nome">
+        <label>Cognome e Nome dell'Agente <span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Es. Rossi Mario">
+        <span class="error-msg">Campo obbligatorio</span>
+      </div>
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="btn btn-primary" onclick="goTo(2)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: Accesso Cadice + Sezioni -->
+  <div class="step" id="step-2">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Accesso &amp; Sezioni</div>
+      <h2>Utilizzo di CADICE</h2>
+      <p>Indica se hai già effettuato l'accesso a CADICE e le sezioni di tuo interesse.</p>
+    </div>
+    <div class="card">
+      <div class="field">
+        <label>Hai già utilizzato CADICE? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item" onclick="selectRadio('cadice-si', this); document.getElementById('f-notifiche').style.display='none';">
+            <input type="radio" name="cadice" id="cadice-si" value="Sì">
+            <span>Sì</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('cadice-no', this); document.getElementById('f-notifiche').style.display='block';">
+            <input type="radio" name="cadice" id="cadice-no" value="No">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+      <div class="field" id="f-notifiche" style="display:none;">
+        <div class="info-box">
+          <strong>Accedi a CADICE</strong> prima di procedere, seguendo le indicazioni riportate nel <a href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf" style="color:var(--navy-light);font-weight:600;text-decoration:underline;">Vademecum</a>. Una volta effettuato l'accesso, verifica le notifiche (campanella in alto a destra).
+        </div>
+        <label>Numero di notifiche rilevate <span class="req">*</span></label>
+        <input type="number" id="notifiche" placeholder="0" min="0" style="max-width:140px;">
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-label">Sezioni di interesse</div>
+      <div class="field">
+        <label>A quali sezioni di CADICE sei interessato? <span class="opt">(seleziona tutte quelle di interesse)</span></label>
+        <div class="section-grid">
+
+          <div class="section-main" id="sm-prodotti">
+            <label class="section-main-label" onclick="toggleSection('sm-prodotti', 's-prodotti')">
+              <input type="checkbox" id="s-prodotti" value="Prodotti Assicurativi">
+              <span>Prodotti Assicurativi</span>
+            </label>
+          </div>
+
+          <div class="section-main has-subs" id="sm-documenti">
+            <label class="section-main-label" onclick="toggleSection('sm-documenti', 's-documenti')">
+              <input type="checkbox" id="s-documenti" value="Documenti">
+              <span>Documenti</span>
+            </label>
+            <div class="section-subs">
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Documenti IDD"> <span>Documenti IDD</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Antiriciclaggio"> <span>Antiriciclaggio</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Onorabilità"> <span>Onorabilità</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="MOG"> <span>MOG</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="section-main" id="sm-registro">
+            <label class="section-main-label" onclick="toggleSection('sm-registro', 's-registro')">
+              <input type="checkbox" id="s-registro" value="Registro Incentivi">
+              <span>Registro Incentivi</span>
+            </label>
+          </div>
+
+          <div class="section-main" id="sm-rete">
+            <label class="section-main-label" onclick="toggleSection('sm-rete', 's-rete')">
+              <input type="checkbox" id="s-rete" value="Rete Distributiva">
+              <span>Rete Distributiva</span>
+            </label>
+          </div>
+
+          <div class="section-main has-subs" id="sm-privacy">
+            <label class="section-main-label" onclick="toggleSection('sm-privacy', 's-privacy')">
+              <input type="checkbox" id="s-privacy" value="Privacy">
+              <span>Privacy</span>
+            </label>
+            <div class="section-subs">
+              <label class="sub-item">
+                <input type="checkbox" name="priv-sub" value="Modulistica Privacy"> <span>Modulistica</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="priv-sub" value="Monitoraggio Privacy"> <span>Monitoraggio</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(1)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(3)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: Mandato + Partecipazione -->
+  <div class="step" id="step-3">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Agenzia &amp; Partecipazione</div>
+      <h2>Tipologia di mandato e partecipazione</h2>
+      <p>Indica il tipo di mandato della tua agenzia e chi parteciperà all'appuntamento CADICE.</p>
+    </div>
+    <div class="card">
+      <div class="field">
+        <label>L'Agenzia è: <span class="req">*</span></label>
+        <div class="info-box" style="margin-bottom:14px; font-size:12px;">
+          Si intende <strong>Plurimandataria</strong> l'agenzia con mandati ulteriori rispetto a Unipol e UniSalute.
+        </div>
+        <div class="radio-group inline">
+          <label class="radio-item" onclick="selectRadio('m-mono', this); hideMandatoVita()">
+            <input type="radio" name="mandato" id="m-mono" value="Monomandataria">
+            <span>Monomandataria</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('m-pluri', this); showMandatoVita()">
+            <input type="radio" name="mandato" id="m-pluri" value="Plurimandataria">
+            <span>Plurimandataria</span>
+          </label>
+        </div>
+      </div>
+      <div class="field sub-field" id="f-vita">
+        <label>Ha un mandato VITA con una Compagnia esterna al Gruppo Unipol? <span class="req">*</span></label>
+        <div class="radio-group inline">
+          <label class="radio-item" onclick="selectRadio('vita-si', this)">
+            <input type="radio" name="vita" id="vita-si" value="Sì">
+            <span>Sì</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('vita-no', this)">
+            <input type="radio" name="vita" id="vita-no" value="No">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="field">
+        <label>All'appuntamento CADICE parteciperà: <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selectRadio('p-personale', this); hideCollaboratore()">
+            <input type="radio" name="partecipa" id="p-personale" value="Personalmente">
+            <span>L'Agente personalmente</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('p-delega', this); showCollaboratore()">
+            <input type="radio" name="partecipa" id="p-delega" value="Collaboratore delegato">
+            <span>Un Collaboratore delegato</span>
+          </label>
+        </div>
+        <div class="sub-field" id="f-collab">
+          <div class="info-box" style="font-size:12px; margin-bottom:12px;">
+            <strong>Nota bene:</strong> se parteciperà il Collaboratore, è necessario procedere alla "delega" come indicato nel Vademecum (<a href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf" style="color:var(--navy-light);font-weight:600;text-decoration:underline;">clicca per scaricare</a>).
+          </div>
+          <label>Cognome e Nome del Collaboratore <span class="req">*</span></label>
+          <input type="text" id="collaboratore" placeholder="Es. Bianchi Anna">
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(2)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Riepilogo + Invio -->
+  <div class="step" id="step-4">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Conferma</div>
+      <h2>Verifica e invia</h2>
+      <p>Controlla i dati prima di inviare la scheda. Potrai tornare indietro per correggere.</p>
+    </div>
+    <div class="card">
+      <div class="section-label">Riepilogo</div>
+      <div id="riepilogo-content"></div>
+    </div>
+    <input type="hidden" id="luogo" value="">
+    <input type="hidden" id="data-firma" value="">
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+        <button class="btn btn-secondary" onclick="downloadPDF()" style="border-color:var(--navy);color:var(--navy);">
+          ⬇ Scarica riepilogo PDF
+        </button>
+        <button class="btn btn-gold" id="btn-invia" onclick="submitForm()">
+          <span id="btn-label">Invia scheda</span>
+          <div class="spinner gold" id="spinner"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="step" id="step-success">
+    <div class="card">
+      <div class="success-wrap">
+        <div class="success-icon">✓</div>
+        <h2>Scheda inviata</h2>
+        <p>I dati sono stati registrati correttamente. Lo staff AUA ti contatterà per confermare l'appuntamento CADICE.</p>
+        <div class="summary-box" id="success-summary"></div>
+        <br>
+
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
+  Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
+  Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.6
+</footer>
+
+
+<script src="jspdf.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
