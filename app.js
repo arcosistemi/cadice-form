@@ -4,12 +4,12 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhdrvHXdoylSCl
 
 // ── STATE ─────────────────────────────────────────────────
 let currentStep = 1;
-const totalSteps = 4;
+const totalSteps = 5;
 
 // ── NAVIGATION ────────────────────────────────────────────
 function goTo(n) {
   if (n > currentStep && !validate(currentStep)) return;
-  if (n === totalSteps) buildRiepilogo();
+  if (n === 5) buildRiepilogo();
   document.getElementById('step-' + currentStep).classList.remove('active');
   currentStep = n;
   const target = document.getElementById('step-' + currentStep) || document.getElementById('step-success');
