@@ -16,7 +16,14 @@ function goTo(n) {
   target.classList.add('active');
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (n === 4) initCalendly();
+  if (n === 4) {
+    initCalendly();
+    // Reset confirmation checkbox and Avanti button
+    const cb = document.getElementById('check-prenotato');
+    const btn = document.getElementById('btn-avanti-5');
+    if (cb) cb.checked = false;
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed'; }
+  }
 }
 
 function updateProgress() {
@@ -413,32 +420,20 @@ function initCalendly() {
     '&email=' + encodeURIComponent(email);
 
   const container = document.getElementById('calendly-widget');
-  container.innerHTML = '';
-
-  function doInit() {
-    if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function') {
-      Calendly.initInlineWidget({
-        url: url,
-        parentElement: container,
-        prefill: { name: nome, email: email }
-      });
-    } else {
-      setTimeout(doInit, 150);
-    }
-  }
-  doInit();
+  container.innerHTML = '<iframe src="' + url + '" width="100%" height="700" frameborder="0" style="border:none;min-width:320px;"></iframe>';
 }
 
-// Listen for Calendly event_scheduled → unlock Avanti button
-window.addEventListener('message', function(e) {
-  if (e.data && e.data.event && e.data.event === 'calendly.event_scheduled') {
-    const btn = document.getElementById('btn-avanti-5');
-    if (btn) {
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      btn.style.cursor = 'pointer';
-      btn.title = '';
-      btn.textContent = 'Avanti →';
-    }
+// Unlock Avanti when user confirms booking via checkbox
+function toggleAvantiCalendly(cb) {
+  const btn = document.getElementById('btn-avanti-5');
+  if (!btn) return;
+  if (cb.checked) {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+  } else {
+    btn.disabled = true;
+    btn.style.opacity = '0.4';
+    btn.style.cursor = 'not-allowed';
   }
-});
+}
