@@ -16,6 +16,7 @@ function goTo(n) {
   target.classList.add('active');
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (n === 4) initCalendly();
 }
 
 function updateProgress() {
@@ -31,8 +32,14 @@ function validate(step) {
   let ok = true;
   if (step === 1) {
     ok = requireField('codice', 'f-codice') & requireField('nome', 'f-nome');
-    if (!document.getElementById('ragione').value.trim()) {
-      // Ragione sociale not required strictly, just nudge
+    // Validate email
+    const emailVal = document.getElementById('email').value.trim();
+    const emailField = document.getElementById('f-email');
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+    if (!emailOk) {
+      emailField.classList.add('has-error');
+      document.getElementById('email').addEventListener('input', () => emailField.classList.remove('has-error'), { once: true });
+      ok = false;
     }
   }
   if (step === 2) {
@@ -184,6 +191,7 @@ async function submitForm() {
     codice: document.getElementById('codice').value,
     ragione: document.getElementById('ragione').value,
     agente: document.getElementById('nome').value,
+    email: document.getElementById('email').value,
     cadice_usato: cadice ? cadice.value : '',
     notifiche: document.getElementById('notifiche').value || '',
     sezioni: sezioni.join(' | '),
@@ -277,6 +285,7 @@ function collectData() {
     codice: document.getElementById('codice').value || '—',
     ragione: document.getElementById('ragione').value || '—',
     agente: document.getElementById('nome').value || '—',
+    email: document.getElementById('email').value || '—',
     cadice_usato: cadice ? cadice.value : '—',
     notifiche: document.getElementById('notifiche').value || '—',
     sezioni: sezioni.length ? sezioni.join(', ') : 'Nessuna selezionata',
@@ -329,6 +338,7 @@ function downloadPDF() {
     ['Codice Agenzia', d.codice],
     ['Ragione Sociale', d.ragione],
     ['Agente', d.agente],
+    ['Email', d.email],
     ['CADICE già utilizzato', d.cadice_usato],
     ...(d.cadice_usato === 'No' ? [['Notifiche rilevate', d.notifiche]] : []),
     ['Sezioni di interesse', d.sezioni],
@@ -393,3 +403,34 @@ function todayIT() {
 }
 document.getElementById('data-firma').value = todayIT();
 updateProgress();
+// ── CALENDLY ──────────────────────────────────────────────
+function initCalendly() {
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const url = 'https://calendly.com/assistenza_agenzie-auaonline/cadice-meeting-30-minuti' +
+    '?hide_gdpr_banner=1&primary_color=0b1f4a' +
+    '&name=' + encodeURIComponent(nome) +
+    '&email=' + encodeURIComponent(email);
+
+  const container = document.getElementById('calendly-widget');
+  container.innerHTML = '';
+  Calendly.initInlineWidget({
+    url: url,
+    parentElement: container,
+    prefill: { name: nome, email: email }
+  });
+}
+
+// Listen for Calendly event_scheduled → unlock Avanti button
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.event && e.data.event === 'calendly.event_scheduled') {
+    const btn = document.getElementById('btn-avanti-5');
+    if (btn) {
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      btn.style.cursor = 'pointer';
+      btn.title = '';
+      btn.textContent = 'Avanti →';
+    }
+  }
+});
