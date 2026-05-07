@@ -1,6 +1,6 @@
 // ── CONFIG ────────────────────────────────────────────────
 // Sostituisci con l'URL del tuo Google Apps Script (vedi guida)
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzOHSb9WbvhuMKxqPGVutPfY6mtrfxWljUMoH7JFVaOUMtyOXh9fnOc8eo1X8sf-lhd/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhdrvHXdoylSClpoDyKSn22E58Mf1JLNl7EUotfCzo4RwrYgd_dxukecx96nSfUwJitQ/exec';
 
 // ── STATE ─────────────────────────────────────────────────
 let currentStep = 1;
@@ -38,15 +38,7 @@ function validate(step) {
   let ok = true;
   if (step === 1) {
     ok = requireField('codice', 'f-codice') & requireField('nome', 'f-nome');
-    // Validate email
-    const emailVal = document.getElementById('email').value.trim();
-    const emailField = document.getElementById('f-email');
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-    if (!emailOk) {
-      emailField.classList.add('has-error');
-      document.getElementById('email').addEventListener('input', () => emailField.classList.remove('has-error'), { once: true });
-      ok = false;
-    }
+
   }
   if (step === 2) {
     const r = document.querySelector('input[name="cadice"]:checked');
@@ -197,7 +189,6 @@ async function submitForm() {
     codice: document.getElementById('codice').value,
     ragione: document.getElementById('ragione').value,
     agente: document.getElementById('nome').value,
-    email: document.getElementById('email').value,
     cadice_usato: cadice ? cadice.value : '',
     notifiche: document.getElementById('notifiche').value || '',
     sezioni: sezioni.join(' | '),
@@ -291,7 +282,6 @@ function collectData() {
     codice: document.getElementById('codice').value || '—',
     ragione: document.getElementById('ragione').value || '—',
     agente: document.getElementById('nome').value || '—',
-    email: document.getElementById('email').value || '—',
     cadice_usato: cadice ? cadice.value : '—',
     notifiche: document.getElementById('notifiche').value || '—',
     sezioni: sezioni.length ? sezioni.join(', ') : 'Nessuna selezionata',
@@ -344,7 +334,6 @@ function downloadPDF() {
     ['Codice Agenzia', d.codice],
     ['Ragione Sociale', d.ragione],
     ['Agente', d.agente],
-    ['Email', d.email],
     ['CADICE già utilizzato', d.cadice_usato],
     ...(d.cadice_usato === 'No' ? [['Notifiche rilevate', d.notifiche]] : []),
     ['Sezioni di interesse', d.sezioni],
