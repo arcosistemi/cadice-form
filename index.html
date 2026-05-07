@@ -258,9 +258,15 @@
     <div class="card">
       <div id="calendly-widget" style="min-width:320px;height:700px;"></div>
     </div>
+    <div style="margin-top:20px;padding:16px 0;">
+      <label class="check-item" id="check-prenotato-label" style="max-width:480px;margin:0 auto;">
+        <input type="checkbox" id="check-prenotato" onchange="toggleAvantiCalendly(this)">
+        <span>Ho completato la prenotazione dell'appuntamento</span>
+      </label>
+    </div>
     <div class="nav">
       <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
-      <button class="btn btn-primary" id="btn-avanti-5" onclick="goTo(5)" disabled style="opacity:0.4;cursor:not-allowed;" title="Completa la prenotazione per continuare">
+      <button class="btn btn-primary" id="btn-avanti-5" onclick="goTo(5)" disabled style="opacity:0.4;cursor:not-allowed;">
         Avanti →
       </button>
     </div>
@@ -311,11 +317,10 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.9a
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.0
 </footer>
 
 
-<script src="https://assets.calendly.com/assets/external/widget.js"></script>
 <script src="jspdf.min.js"></script>
 <script src="app.js"></script>
 </body>
