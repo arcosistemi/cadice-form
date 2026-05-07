@@ -414,11 +414,19 @@ function initCalendly() {
 
   const container = document.getElementById('calendly-widget');
   container.innerHTML = '';
-  Calendly.initInlineWidget({
-    url: url,
-    parentElement: container,
-    prefill: { name: nome, email: email }
-  });
+
+  function doInit() {
+    if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function') {
+      Calendly.initInlineWidget({
+        url: url,
+        parentElement: container,
+        prefill: { name: nome, email: email }
+      });
+    } else {
+      setTimeout(doInit, 150);
+    }
+  }
+  doInit();
 }
 
 // Listen for Calendly event_scheduled → unlock Avanti button
