@@ -283,15 +283,10 @@
     <input type="hidden" id="data-firma" value="">
     <div class="nav">
       <button class="btn btn-secondary" onclick="goTo(4)">← Indietro</button>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
-        <button class="btn btn-gold" id="btn-invia" onclick="submitForm()">
-          <span id="btn-label">Invia scheda</span>
-          <div class="spinner gold" id="spinner"></div>
-        </button>
-        <button class="btn btn-secondary" onclick="downloadPDF()" style="border-color:var(--navy);color:var(--navy);">
-          ⬇ Scarica riepilogo PDF
-        </button>
-      </div>
+      <button class="btn btn-gold" id="btn-invia" onclick="submitForm()">
+        <span id="btn-label">Invia scheda</span>
+        <div class="spinner gold" id="spinner"></div>
+      </button>
     </div>
   </div>
 
@@ -303,6 +298,10 @@
         <h2>Scheda inviata</h2>
         <p>I dati sono stati registrati correttamente. A breve riceverai una conferma via email con il link per il collegamento in videoconferenza.</p>
         <div class="summary-box" id="success-summary"></div>
+        <br>
+        <button class="btn btn-secondary" onclick="downloadPDF()" style="border-color:var(--navy);color:var(--navy);margin-top:8px;">
+          ⬇ Scarica riepilogo PDF
+        </button>
       </div>
     </div>
   </div>
@@ -313,7 +312,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.5
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.6
 </footer>
 
 
