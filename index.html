@@ -67,6 +67,11 @@
         <input type="text" id="nome" placeholder="Es. Rossi Mario">
         <span class="error-msg">Campo obbligatorio</span>
       </div>
+      <div class="field" id="f-email">
+        <label>Email dell'Agente <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="Es. mario.rossi@agenzia.it">
+        <span class="error-msg">Inserisci un'email valida</span>
+      </div>
     </div>
     <div class="nav">
       <span></span>
@@ -251,14 +256,13 @@
       <p>Seleziona una data e un orario disponibile. Riceverai una conferma via email con il link per il collegamento in videoconferenza.</p>
     </div>
     <div class="card">
-      <div class="calendly-inline-widget"
-           data-url="https://calendly.com/assistenza_agenzie-auaonline/cadice-meeting-30-minuti?hide_gdpr_banner=1&primary_color=0b1f4a"
-           style="min-width:320px;height:700px;">
-      </div>
+      <div id="calendly-widget" style="min-width:320px;height:700px;"></div>
     </div>
     <div class="nav">
       <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
-      <button class="btn btn-primary" onclick="goTo(5)">Avanti →</button>
+      <button class="btn btn-primary" id="btn-avanti-5" onclick="goTo(5)" disabled style="opacity:0.4;cursor:not-allowed;" title="Completa la prenotazione per continuare">
+        Avanti →
+      </button>
     </div>
   </div>
 
@@ -307,7 +311,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.8
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.9
 </footer>
 
 
