@@ -1,6 +1,6 @@
 // ── CONFIG ────────────────────────────────────────────────
 // Sostituisci con l'URL del tuo Google Apps Script (vedi guida)
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhdrvHXdoylSClpoDyKSn22E58Mf1JLNl7EUotfCzo4RwrYgd_dxukecx96nSfUwJitQ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsJv4H3Ufw10mxHTJ8LxMrzqAZ0Wr8VknbbnVwn_s4wY3vrIAH3rpYhw52324wWATigg/exec';
 
 // ── STATE ─────────────────────────────────────────────────
 let currentStep = 1;
