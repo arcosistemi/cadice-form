@@ -17,7 +17,6 @@ function goTo(n) {
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (n === 4) {
-    initCalendly();
     // Reset confirmation checkbox and Avanti button
     const cb = document.getElementById('check-prenotato');
     const btn = document.getElementById('btn-avanti-5');
@@ -410,18 +409,7 @@ function todayIT() {
 }
 document.getElementById('data-firma').value = todayIT();
 updateProgress();
-// ── CALENDLY ──────────────────────────────────────────────
-function initCalendly() {
-  const nome = document.getElementById('nome').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const url = 'https://calendly.com/assistenza_agenzie-auaonline/cadice-meeting-30-minuti' +
-    '?hide_gdpr_banner=1&primary_color=0b1f4a' +
-    '&name=' + encodeURIComponent(nome) +
-    '&email=' + encodeURIComponent(email);
-
-  const container = document.getElementById('calendly-widget');
-  container.innerHTML = '<iframe src="' + url + '" width="100%" height="700" frameborder="0" style="border:none;min-width:320px;"></iframe>';
-}
+// Calendly: iframe statico in index.html, nessuna inizializzazione JS necessaria
 
 // Unlock Avanti when user confirms booking via checkbox
 function toggleAvantiCalendly(cb) {
