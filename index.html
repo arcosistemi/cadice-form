@@ -243,8 +243,27 @@
     </div>
   </div>
 
-  <!-- STEP 4: Riepilogo + Invio -->
+  <!-- STEP 4: Prenota appuntamento -->
   <div class="step" id="step-4">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Appuntamento</div>
+      <h2>Prenota il tuo appuntamento</h2>
+      <p>Seleziona una data e un orario disponibile. Riceverai una conferma via email con il link per il collegamento in videoconferenza.</p>
+    </div>
+    <div class="card">
+      <div class="calendly-inline-widget"
+           data-url="https://calendly.com/assistenza_agenzie-auaonline/cadice-meeting-30-minuti?hide_gdpr_banner=1&primary_color=0b1f4a"
+           style="min-width:320px;height:700px;">
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(5)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 5: Riepilogo + Invio -->
+  <div class="step" id="step-5">
     <div class="step-header">
       <div class="step-badge"><span class="dot"></span>Conferma</div>
       <h2>Verifica e invia</h2>
@@ -257,7 +276,7 @@
     <input type="hidden" id="luogo" value="">
     <input type="hidden" id="data-firma" value="">
     <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
+      <button class="btn btn-secondary" onclick="goTo(4)">← Indietro</button>
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
         <button class="btn btn-secondary" onclick="downloadPDF()" style="border-color:var(--navy);color:var(--navy);">
           ⬇ Scarica riepilogo PDF
@@ -276,17 +295,8 @@
       <div class="success-wrap">
         <div class="success-icon">✓</div>
         <h2>Scheda inviata</h2>
-        <p>I dati sono stati registrati correttamente. Ora prenota il tuo appuntamento CADICE scegliendo la data e l'orario che preferisci.</p>
+        <p>I dati sono stati registrati correttamente. A breve riceverai una conferma via email con il link per il collegamento in videoconferenza.</p>
         <div class="summary-box" id="success-summary"></div>
-      </div>
-    </div>
-
-    <div class="card" style="margin-top:20px;">
-      <div class="section-label">Prenota il tuo appuntamento</div>
-      <p style="font-size:14px;color:var(--text-muted);margin-bottom:20px;line-height:1.6;">Seleziona una data e un orario disponibile. Riceverai una conferma via email con il link per il collegamento in videoconferenza.</p>
-      <div class="calendly-inline-widget"
-           data-url="https://calendly.com/assistenza_agenzie-auaonline/cadice-meeting-30-minuti?hide_gdpr_banner=1&primary_color=0b1f4a"
-           style="min-width:320px;height:700px;">
       </div>
     </div>
   </div>
@@ -297,7 +307,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.7
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 2.8
 </footer>
 
 
