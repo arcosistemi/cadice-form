@@ -158,6 +158,65 @@
             </label>
           </div>
 
+          <div class="section-main has-subs" id="sm-documenti">
+            <label class="section-main-label" onclick="toggleSection('sm-documenti', 's-documenti')">
+              <input type="checkbox" id="s-documenti" value="Documenti">
+              <span>Documenti</span>
+            </label>
+            <div class="section-subs">
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Documenti IDD"> <span>Documenti IDD</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Antiriciclaggio"> <span>Antiriciclaggio</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="Onorabilità"> <span>Onorabilità</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="doc-sub" value="MOG"> <span>MOG</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="section-main" id="sm-registro">
+            <label class="section-main-label" onclick="toggleSection('sm-registro', 's-registro')">
+              <input type="checkbox" id="s-registro" value="Registro Incentivi">
+              <span>Registro Incentivi</span>
+            </label>
+          </div>
+
+          <div class="section-main" id="sm-rete">
+            <label class="section-main-label" onclick="toggleSection('sm-rete', 's-rete')">
+              <input type="checkbox" id="s-rete" value="Rete Distributiva">
+              <span>Rete Distributiva</span>
+            </label>
+          </div>
+
+          <div class="section-main has-subs" id="sm-privacy">
+            <label class="section-main-label" onclick="toggleSection('sm-privacy', 's-privacy')">
+              <input type="checkbox" id="s-privacy" value="Privacy">
+              <span>Privacy</span>
+            </label>
+            <div class="section-subs">
+              <label class="sub-item">
+                <input type="checkbox" name="priv-sub" value="Modulistica Privacy"> <span>Modulistica</span>
+              </label>
+              <label class="sub-item">
+                <input type="checkbox" name="priv-sub" value="Monitoraggio Privacy"> <span>Monitoraggio</span>
+              </label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(2)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Avanti →</button>
+    </div>
+  </div>
+
   <!-- STEP 3: Mandato + Partecipazione -->
   <div class="step" id="step-4">
     <div class="step-header">
@@ -265,7 +324,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7a
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7
 </footer>
 
 
