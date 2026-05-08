@@ -256,6 +256,35 @@
       </div>
     </div>
 
+    <div class="card">
+      <div class="field">
+        <label>All'appuntamento CADICE parteciperà: <span class="req">*</span></label>
+        <div class="radio-group">
+          <label class="radio-item" onclick="selectRadio('p-personale', this); hideCollaboratore()">
+            <input type="radio" name="partecipa" id="p-personale" value="Personalmente">
+            <span>L'Agente personalmente</span>
+          </label>
+          <label class="radio-item" onclick="selectRadio('p-delega', this); showCollaboratore()">
+            <input type="radio" name="partecipa" id="p-delega" value="Collaboratore delegato">
+            <span>Un Collaboratore delegato</span>
+          </label>
+        </div>
+        <div class="sub-field" id="f-collab">
+          <div class="info-box" style="font-size:12px; margin-bottom:12px;">
+            <strong>Nota bene:</strong> se parteciperà il Collaboratore, è necessario procedere alla "delega" come indicato nel Vademecum (<a href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf" style="color:var(--navy-light);font-weight:600;text-decoration:underline;">clicca per scaricare</a>).
+          </div>
+          <label>Cognome e Nome del Collaboratore <span class="req">*</span></label>
+          <input type="text" id="collaboratore" placeholder="Es. Bianchi Anna">
+        </div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(5)">Avanti →</button>
+    </div>
+  </div>
+
   <!-- STEP 4: Prenota appuntamento -->
   <div class="step" id="step-5">
     <div class="step-header">
@@ -324,7 +353,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7b
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7c
 </footer>
 
 
