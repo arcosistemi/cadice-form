@@ -36,6 +36,10 @@ function updateProgress() {
 // ── VALIDATION ────────────────────────────────────────────
 function validate(step) {
   let ok = true;
+  if (step === 1) {
+    // Pagina introduttiva, nessun campo da validare
+    return true;
+  }
   if (step === 2) {
     ok = requireField('codice', 'f-codice') & requireField('nome', 'f-nome');
   }
