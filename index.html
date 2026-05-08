@@ -36,41 +36,8 @@
 </header>
 
 <main>
-
-  <!-- STEP 1: Anagrafica -->
-  <div class="step" id="step-2">
-    <div class="step-header">
-      <div class="step-badge"><span class="dot"></span>Dati Identificativi</div>
-      <h2>Informazioni sull'Agenzia</h2>
-      <p>Inserisci i tuoi dati per identificare l'agenzia e l'agente che partecipa all'appuntamento.</p>
-    </div>
-    <div class="card">
-      <div class="fields-row">
-        <div class="field" id="f-codice">
-          <label>Codice Agenzia <span class="req">*</span></label>
-          <input type="number" id="codice" placeholder="Es. 12345" min="0" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-          <span class="error-msg">Campo obbligatorio</span>
-        </div>
-        <div class="field">
-          <label>Ragione Sociale Agenzia <span class="req">*</span></label>
-          <input type="text" id="ragione" placeholder="Denominazione agenzia">
-        </div>
-      </div>
-      <div class="field" id="f-nome">
-        <label>Cognome e Nome dell'Agente <span class="req">*</span></label>
-        <input type="text" id="nome" placeholder="Es. Rossi Mario">
-        <span class="error-msg">Campo obbligatorio</span>
-      </div>
-
-    </div>
-    <div class="nav">
-      <span></span>
-      <button class="btn btn-primary" onclick="goTo(3)">Avanti →</button>
-    </div>
-  </div>
-
   <!-- STEP 1: Introduzione -->
-  <div class="step active" id="step-1">
+  <div class="step active"> id="step-1">
     <div style="text-align:center; padding: 16px 0 28px;">
       <img src="assets/logo-aua.png" alt="Sistema AUA" style="height:80px;width:auto;margin-bottom:24px;">
       <h1 style="font-family:'Poppins',sans-serif;font-size:32px;font-weight:700;color:var(--navy);margin-bottom:8px;">CADICE</h1>
@@ -117,6 +84,31 @@
     </div>
   </div>
 
+  <!-- STEP 1: Anagrafica -->
+  <div class="step" id="step-2">
+    <div class="step-header">
+      <div class="step-badge"><span class="dot"></span>Dati Identificativi</div>
+      <h2>Informazioni sull'Agenzia</h2>
+      <p>Inserisci i tuoi dati per identificare l'agenzia e l'agente che partecipa all'appuntamento.</p>
+    </div>
+    <div class="card">
+      <div class="fields-row">
+        <div class="field" id="f-codice">
+          <label>Codice Agenzia <span class="req">*</span></label>
+          <input type="number" id="codice" placeholder="Es. 12345" min="0" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+          <span class="error-msg">Campo obbligatorio</span>
+        </div>
+        <div class="field">
+          <label>Ragione Sociale Agenzia <span class="req">*</span></label>
+          <input type="text" id="ragione" placeholder="Denominazione agenzia">
+        </div>
+      </div>
+      <div class="field" id="f-nome">
+        <label>Cognome e Nome dell'Agente <span class="req">*</span></label>
+        <input type="text" id="nome" placeholder="Es. Rossi Mario">
+        <span class="error-msg">Campo obbligatorio</span>
+      </div>
+
   <!-- STEP 2: Accesso Cadice + Sezioni -->
   <div class="step" id="step-3">
     <div class="step-header">
@@ -159,65 +151,6 @@
             </label>
           </div>
 
-          <div class="section-main has-subs" id="sm-documenti">
-            <label class="section-main-label" onclick="toggleSection('sm-documenti', 's-documenti')">
-              <input type="checkbox" id="s-documenti" value="Documenti">
-              <span>Documenti</span>
-            </label>
-            <div class="section-subs">
-              <label class="sub-item">
-                <input type="checkbox" name="doc-sub" value="Documenti IDD"> <span>Documenti IDD</span>
-              </label>
-              <label class="sub-item">
-                <input type="checkbox" name="doc-sub" value="Antiriciclaggio"> <span>Antiriciclaggio</span>
-              </label>
-              <label class="sub-item">
-                <input type="checkbox" name="doc-sub" value="Onorabilità"> <span>Onorabilità</span>
-              </label>
-              <label class="sub-item">
-                <input type="checkbox" name="doc-sub" value="MOG"> <span>MOG</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="section-main" id="sm-registro">
-            <label class="section-main-label" onclick="toggleSection('sm-registro', 's-registro')">
-              <input type="checkbox" id="s-registro" value="Registro Incentivi">
-              <span>Registro Incentivi</span>
-            </label>
-          </div>
-
-          <div class="section-main" id="sm-rete">
-            <label class="section-main-label" onclick="toggleSection('sm-rete', 's-rete')">
-              <input type="checkbox" id="s-rete" value="Rete Distributiva">
-              <span>Rete Distributiva</span>
-            </label>
-          </div>
-
-          <div class="section-main has-subs" id="sm-privacy">
-            <label class="section-main-label" onclick="toggleSection('sm-privacy', 's-privacy')">
-              <input type="checkbox" id="s-privacy" value="Privacy">
-              <span>Privacy</span>
-            </label>
-            <div class="section-subs">
-              <label class="sub-item">
-                <input type="checkbox" name="priv-sub" value="Modulistica Privacy"> <span>Modulistica</span>
-              </label>
-              <label class="sub-item">
-                <input type="checkbox" name="priv-sub" value="Monitoraggio Privacy"> <span>Monitoraggio</span>
-              </label>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(2)">← Indietro</button>
-      <button class="btn btn-primary" onclick="goTo(4)">Avanti →</button>
-    </div>
-  </div>
-
   <!-- STEP 3: Mandato + Partecipazione -->
   <div class="step" id="step-4">
     <div class="step-header">
@@ -256,35 +189,6 @@
         </div>
       </div>
     </div>
-
-    <div class="card">
-      <div class="field">
-        <label>All'appuntamento CADICE parteciperà: <span class="req">*</span></label>
-        <div class="radio-group">
-          <label class="radio-item" onclick="selectRadio('p-personale', this); hideCollaboratore()">
-            <input type="radio" name="partecipa" id="p-personale" value="Personalmente">
-            <span>L'Agente personalmente</span>
-          </label>
-          <label class="radio-item" onclick="selectRadio('p-delega', this); showCollaboratore()">
-            <input type="radio" name="partecipa" id="p-delega" value="Collaboratore delegato">
-            <span>Un Collaboratore delegato</span>
-          </label>
-        </div>
-        <div class="sub-field" id="f-collab">
-          <div class="info-box" style="font-size:12px; margin-bottom:12px;">
-            <strong>Nota bene:</strong> se parteciperà il Collaboratore, è necessario procedere alla "delega" come indicato nel Vademecum (<a href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf" style="color:var(--navy-light);font-weight:600;text-decoration:underline;">clicca per scaricare</a>).
-          </div>
-          <label>Cognome e Nome del Collaboratore <span class="req">*</span></label>
-          <input type="text" id="collaboratore" placeholder="Es. Bianchi Anna">
-        </div>
-      </div>
-    </div>
-
-    <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
-      <button class="btn btn-primary" onclick="goTo(5)">Avanti →</button>
-    </div>
-  </div>
 
   <!-- STEP 4: Prenota appuntamento -->
   <div class="step" id="step-5">
@@ -354,7 +258,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7a
 </footer>
 
 
