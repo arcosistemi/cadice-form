@@ -4,19 +4,19 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwsJv4H3Ufw10mx
 
 // ── STATE ─────────────────────────────────────────────────
 let currentStep = 1;
-const totalSteps = 5;
+const totalSteps = 6;
 
 // ── NAVIGATION ────────────────────────────────────────────
 function goTo(n) {
   if (n > currentStep && !validate(currentStep)) return;
-  if (n === 5) buildRiepilogo();
+  if (n === 6) buildRiepilogo();
   document.getElementById('step-' + currentStep).classList.remove('active');
   currentStep = n;
   const target = document.getElementById('step-' + currentStep) || document.getElementById('step-success');
   target.classList.add('active');
   updateProgress();
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (n === 4) {
+  if (n === 5) {
     // Reset confirmation checkbox and Avanti button
     const cb = document.getElementById('check-prenotato');
     const btn = document.getElementById('btn-avanti-5');
@@ -36,15 +36,14 @@ function updateProgress() {
 // ── VALIDATION ────────────────────────────────────────────
 function validate(step) {
   let ok = true;
-  if (step === 1) {
-    ok = requireField('codice', 'f-codice') & requireField('nome', 'f-nome');
-
-  }
   if (step === 2) {
+    ok = requireField('codice', 'f-codice') & requireField('nome', 'f-nome');
+  }
+  if (step === 3) {
     const r = document.querySelector('input[name="cadice"]:checked');
     if (!r) { alert('Indica se hai già utilizzato CADICE.'); ok = false; }
   }
-  if (step === 3) {
+  if (step === 4) {
     const m = document.querySelector('input[name="mandato"]:checked');
     if (!m) { alert('Seleziona il tipo di mandato dell\'agenzia.'); ok = false; }
     const p = document.querySelector('input[name="partecipa"]:checked');
