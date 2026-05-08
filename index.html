@@ -38,13 +38,7 @@
 <main>
 
   <!-- STEP 1: Anagrafica -->
-  <div class="step active" id="step-1">
-    <div class="vademecum-banner">
-      <span class="vademecum-text">📄 Prima di iniziare clicca qui e scarica il vademecum</span>
-      <a class="btn-vademecum" href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf">
-        ⬇ Vademecum
-      </a>
-    </div>
+  <div class="step" id="step-2">
     <div class="step-header">
       <div class="step-badge"><span class="dot"></span>Dati Identificativi</div>
       <h2>Informazioni sull'Agenzia</h2>
@@ -71,12 +65,60 @@
     </div>
     <div class="nav">
       <span></span>
+      <button class="btn btn-primary" onclick="goTo(3)">Avanti →</button>
+    </div>
+  </div>
+
+  <!-- STEP 1: Introduzione -->
+  <div class="step active" id="step-1">
+    <div style="text-align:center; padding: 16px 0 28px;">
+      <img src="assets/logo-aua.png" alt="Sistema AUA" style="height:80px;width:auto;margin-bottom:24px;">
+      <h1 style="font-family:'Poppins',sans-serif;font-size:32px;font-weight:700;color:var(--navy);margin-bottom:8px;">CADICE</h1>
+      <p style="font-size:13px;color:var(--gold);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:28px;">Assistenza Agenzie UnipolSai</p>
+    </div>
+    <div class="card">
+      <p style="font-size:15px;line-height:1.8;color:var(--text);">
+        Benvenuto nel portale di prenotazione per l'assistenza sulla piattaforma <strong>CADICE</strong>, 
+        il sistema dedicato agli Agenti UnipolSai per la gestione della documentazione, 
+        dei prodotti assicurativi e della rete distributiva.
+      </p>
+      <br>
+      <p style="font-size:15px;line-height:1.8;color:var(--text);">
+        Questo strumento ti guiderà nella compilazione della scheda di preparazione 
+        all'appuntamento di assistenza, raccogliendo le informazioni necessarie per 
+        rendere l'incontro il più efficace possibile.
+      </p>
+      <br>
+      <p style="font-size:15px;line-height:1.8;color:var(--text);">
+        Prima di procedere, ti consigliamo di scaricare e leggere il <strong>Vademecum</strong> 
+        pre-appuntamento, che contiene le istruzioni tecniche per accedere a CADICE 
+        e prepararti correttamente all'incontro.
+      </p>
+      <br>
+      <p style="font-size:15px;line-height:1.8;color:var(--text);">
+        La compilazione richiede circa <strong>5 minuti</strong>. Al termine potrai prenotare 
+        direttamente il tuo appuntamento con il team di assistenza AUA.
+      </p>
+      <br>
+      <p style="font-size:15px;line-height:1.8;color:var(--text);">
+        Per qualsiasi necessità puoi contattarci al numero <strong>800 913131</strong> 
+        oppure scrivere a <strong>info@auaonline.it</strong>.
+      </p>
+    </div>
+    <div class="vademecum-banner" style="margin-top:20px;">
+      <span class="vademecum-text">📄 Prima di iniziare clicca qui e scarica il vademecum</span>
+      <a class="btn-vademecum" href="assets/Cadice_Vademecum_Pre-Appuntamento.pdf" download="Cadice_Vademecum_Pre-Appuntamento.pdf">
+        ⬇ Vademecum
+      </a>
+    </div>
+    <div class="nav">
+      <span></span>
       <button class="btn btn-primary" onclick="goTo(2)">Avanti →</button>
     </div>
   </div>
 
   <!-- STEP 2: Accesso Cadice + Sezioni -->
-  <div class="step" id="step-2">
+  <div class="step" id="step-3">
     <div class="step-header">
       <div class="step-badge"><span class="dot"></span>Accesso &amp; Sezioni</div>
       <h2>Utilizzo di CADICE</h2>
@@ -171,13 +213,13 @@
       </div>
     </div>
     <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(1)">← Indietro</button>
-      <button class="btn btn-primary" onclick="goTo(3)">Avanti →</button>
+      <button class="btn btn-secondary" onclick="goTo(2)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Avanti →</button>
     </div>
   </div>
 
   <!-- STEP 3: Mandato + Partecipazione -->
-  <div class="step" id="step-3">
+  <div class="step" id="step-4">
     <div class="step-header">
       <div class="step-badge"><span class="dot"></span>Agenzia &amp; Partecipazione</div>
       <h2>Tipologia di mandato e partecipazione</h2>
@@ -239,13 +281,13 @@
     </div>
 
     <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(2)">← Indietro</button>
-      <button class="btn btn-primary" onclick="goTo(4)">Avanti →</button>
+      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
+      <button class="btn btn-primary" onclick="goTo(5)">Avanti →</button>
     </div>
   </div>
 
   <!-- STEP 4: Prenota appuntamento -->
-  <div class="step" id="step-4">
+  <div class="step" id="step-5">
     <div class="step-header">
       <div class="step-badge"><span class="dot"></span>Appuntamento</div>
       <h2>Prenota il tuo appuntamento</h2>
@@ -261,15 +303,15 @@
       </label>
     </div>
     <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(3)">← Indietro</button>
-      <button class="btn btn-primary" id="btn-avanti-5" onclick="goTo(5)" disabled style="opacity:0.4;cursor:not-allowed;">
+      <button class="btn btn-secondary" onclick="goTo(4)">← Indietro</button>
+      <button class="btn btn-primary" id="btn-avanti-5" onclick="goTo(6)" disabled style="opacity:0.4;cursor:not-allowed;">
         Avanti →
       </button>
     </div>
   </div>
 
   <!-- STEP 5: Riepilogo + Invio -->
-  <div class="step" id="step-5">
+  <div class="step" id="step-6">
     <div class="step-header">
       <div class="step-badge"><span class="dot"></span>Conferma</div>
       <h2>Verifica e invia</h2>
@@ -282,7 +324,7 @@
     <input type="hidden" id="luogo" value="">
     <input type="hidden" id="data-firma" value="">
     <div class="nav">
-      <button class="btn btn-secondary" onclick="goTo(4)">← Indietro</button>
+      <button class="btn btn-secondary" onclick="goTo(5)">← Indietro</button>
       <button class="btn btn-gold" id="btn-invia" onclick="submitForm()">
         <span id="btn-label">Invia scheda</span>
         <div class="spinner gold" id="spinner"></div>
@@ -312,7 +354,7 @@
   <strong>AUA — Agenti UnipolSai Associati</strong> &nbsp;·&nbsp;
   Via Stalingrado 57, 40128 Bologna &nbsp;·&nbsp;
   Tel <a href="tel:800913131">800 913131</a> &nbsp;·&nbsp;
-  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.6
+  <a href="mailto:info@auaonline.it">info@auaonline.it</a> &nbsp;·&nbsp; ver. 3.7
 </footer>
 
 
