@@ -417,3 +417,8 @@ function toggleAvantiCalendly(cb) {
     btn.style.cursor = 'not-allowed';
   }
 }
+
+// ── CONFERMA CALENDLY ─────────────────────────────────────
+function confirmCalendly() {
+  document.getElementById('modal-conferma').style.display = 'flex';
+}
